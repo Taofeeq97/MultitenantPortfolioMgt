@@ -21,7 +21,7 @@ import dj_database_url
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-=-4e=um42ms0wqznl-+9as!@m#-l_3!551iekh1&^9s5!h!t43'
-DATABASE_URL = ''
+DATABASE_URL = 'postgresql://postgres:rJclzZ9KuamETDj8BsaA@containers-us-west-166.railway.app:5483/railway'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -128,21 +128,21 @@ TEMPLATES = [
 WSGI_APPLICATION = 'portfolio.wsgi.application'
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django_tenants.postgresql_backend',
-        'NAME': 'portfolioo', 
-        'USER': 'postgres',
-        'PASSWORD': '07066609555Otu.',
-        'HOST': 'localhost', 
-        'PORT': '5432',
-    }
-}
-
-
 # DATABASES = {
-#     'default': dj_database_url.config(default=DATABASE_URL, conn_max_age=1800)
+#     'default': {
+#         'ENGINE': 'django_tenants.postgresql_backend',
+#         'NAME': 'portfolioo', 
+#         'USER': 'postgres',
+#         'PASSWORD': '07066609555Otu.',
+#         'HOST': 'localhost', 
+#         'PORT': '5432',
+#     }
 # }
+
+
+DATABASES = {
+    'default': dj_database_url.config(default=DATABASE_URL, conn_max_age=1800)
+}
 
 DATABASE_ROUTERS = (
     'django_tenants.routers.TenantSyncRouter',
