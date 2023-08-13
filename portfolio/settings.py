@@ -35,8 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
+    'django.contrib.messages',    'django.contrib.staticfiles',
     'rest_framework',
     'client',
     
@@ -128,21 +127,21 @@ TEMPLATES = [
 WSGI_APPLICATION = 'portfolio.wsgi.application'
 
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django_tenants.postgresql_backend',
-#         'NAME': 'portfolioo', 
-#         'USER': 'postgres',
-#         'PASSWORD': '07066609555Otu.',
-#         'HOST': 'localhost', 
-#         'PORT': '5432',
-#     }
-# }
-
-
 DATABASES = {
-    'default': dj_database_url.config(default=DATABASE_URL, conn_max_age=1800)
-}
+    'default': {
+        'ENGINE': 'django_tenants.postgresql_backend',
+        'NAME': 'railway', 
+        'USER': 'postgres',
+        'PASSWORD': 'rJclzZ9KuamETDj8BsaA',
+        'HOST': 'containers-us-west-166.railway.app', 
+        'PORT': '5483',
+    }
+} 
+
+
+# DATABASES = {
+#     'default': dj_database_url.config(default=DATABASE_URL, conn_max_age=1800)
+# }
 
 DATABASE_ROUTERS = (
     'django_tenants.routers.TenantSyncRouter',
