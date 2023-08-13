@@ -30,23 +30,25 @@ ALLOWED_HOSTS = ['*']
 
 # Application definition
 
-INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'rest_framework',
-    'client',
+# INSTALLED_APPS = [
+#     'django.contrib.admin',
+#     'django.contrib.auth',
+#     'django.contrib.contenttypes',
+#     'django.contrib.sessions',
+#     'django.contrib.messages',
+#     'django.contrib.staticfiles',
+#     'rest_framework',
+#     'client',
+#     'drf_yasg',
     
-]
+# ]
 
 SHARED_APPS = (
     'django_tenants',
     'tenant',
     'rest_framework',
     'client',
+    'drf_yasg',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -67,6 +69,7 @@ TENANT_APPS = (
     'rest_framework',
     'client',
     'rest_framework_simplejwt',
+    'drf_yasg',
     
 
 )
