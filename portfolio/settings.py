@@ -76,7 +76,9 @@ INSTALLED_APPS = list(SHARED_APPS) + [ app for app in TENANT_APPS if app not in 
 
 AUTH_USER_MODEL = 'client.BusinessAcount'
 
-CSRF_TRUSTED_ORIGINS = ['http://localhost:8000']
+# settings.py
+
+CSRF_TRUSTED_ORIGINS = ['http://*', 'https://*']
 CORS_ALLOW_ALL_ORIGINS = True
 ALLOWED_HOSTS = ['*']
 
