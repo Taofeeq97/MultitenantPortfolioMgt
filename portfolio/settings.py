@@ -78,7 +78,7 @@ AUTH_USER_MODEL = 'client.BusinessAcount'
 
 # settings.py
 
-CSRF_TRUSTED_ORIGINS = ['http://*', 'https://*']
+CSRF_TRUSTED_ORIGINS = ['http://*', 'https://*', 'https://web-production-a587.up.railway.app']
 CORS_ALLOW_ALL_ORIGINS = True
 ALLOWED_HOSTS = ['*']
 
