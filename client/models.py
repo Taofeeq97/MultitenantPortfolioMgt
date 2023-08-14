@@ -49,9 +49,15 @@ class ClientPortfolio(models.Model):
 class Organization(models.Model):
     name = models.CharField(max_length=50)
 
+    def __str__(self):
+        return self.name
+
 
 class OrganizationalUnit(models.Model):
     name = models.CharField(max_length=50)
     parent_unit = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE)
     organization = models.ForeignKey(Organization, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
 
