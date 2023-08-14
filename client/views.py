@@ -45,7 +45,7 @@ class CreateClientPortfolioAPIView(generics.CreateAPIView):
             
 
 class ClientPortfolioListAPIView(generics.ListAPIView):
-    queryset = ClientPortfolio.objects.all()
+    queryset = ClientPortfolio.objects.all().prefetch_related('client_industry')
     serializer_class = ClientPortfolioSerializer
     # permission_classes = [IsAuthenticated]
 
