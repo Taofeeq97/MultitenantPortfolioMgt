@@ -72,4 +72,15 @@ class ClientPortfolioListAPIView(generics.ListAPIView):
 class ClientIndustryListAPIView(generics.ListAPIView):
     serializer_class = ClienTIndustrySerializer
     queryset = ClientIndustry
-    
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        serializer = self.serializer_class(queryset, many = True)
+        response_data = {
+            'status': True,
+            'responseCode': status.HTTP_200_OK,
+            'data': serializer.data, 
+            'message': 'Client industries retrieved successfully'
+        }
+        return Response(response_data)
+
