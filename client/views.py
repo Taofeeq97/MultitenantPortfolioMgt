@@ -131,7 +131,7 @@ class OrganizationalUnitTreeAPIView(APIView):
     
     def get(self, request):
         try:
-            root_units = OrganizationalUnit.objects.filter(parent_unit=None, organization__id=2)
+            root_units = OrganizationalUnit.objects.filter(parent_unit=None, organization__id=1)
         except OrganizationalUnit.DoesNotExist:
             response_data = {
                 'status': False,
