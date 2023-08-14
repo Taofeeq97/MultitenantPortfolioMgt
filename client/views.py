@@ -2,8 +2,8 @@ from django.shortcuts import render
 from rest_framework import generics
 from rest_framework import status
 from rest_framework.response import Response
-from .models import ClientPortfolio
-from .serializers import ClientPortfolioSerializer, LoginSerializer
+from .models import ClientPortfolio, ClientIndustry
+from .serializers import ClientPortfolioSerializer, LoginSerializer, ClienTIndustrySerializer
 from collections import defaultdict
 from rest_framework_simplejwt.views import TokenObtainPairView
 
@@ -68,3 +68,8 @@ class ClientPortfolioListAPIView(generics.ListAPIView):
         }
         return Response(response_data)
         
+
+class ClientIndustryListAPIView(generics.ListAPIView):
+    serializer_class = ClienTIndustrySerializer
+    queryset = ClientIndustry
+    
