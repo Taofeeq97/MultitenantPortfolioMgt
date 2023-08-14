@@ -143,7 +143,7 @@ class OrganizationalUnitTreeAPIView(APIView):
                 'status': True,
                 'responseCode':status.HTTP_201_CREATED,
                 'data':unit_trees,
-                'message':'Client industry created successfully'
+                'message':'Organization structure retrieved successfully'
             }
         return Response(response_data)
 
