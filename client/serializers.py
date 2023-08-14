@@ -13,7 +13,7 @@ class ClientPortfolioSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ClientPortfolio
-        fields = ('client_first_name', 'client_last_name','client_gender', 'client_email', 'client_industry', 'client_security_question', 'client_security_answer', 'total_investment')
+        fields = ('client_first_name', 'client_last_name','client_gender', 'client_email', 'client_industry', 'client_security_question', 'client_security_answer','status', 'total_investment')
         extra_kwargs = {
             'client_security_question': {'write_only': True},
             'client_security_answer': {'write_only': True}

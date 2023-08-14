@@ -39,7 +39,7 @@ class ClientPortfolio(models.Model):
     client_security_question = models.CharField(max_length=100)
     client_security_answer = models.CharField(max_length=100)
     total_investment = models.IntegerField()
-    is_active = models.BooleanField(default=True)
+    status = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now=True, null=True)
     updated_at = models.DateTimeField(auto_now_add=True, null=True)
 
