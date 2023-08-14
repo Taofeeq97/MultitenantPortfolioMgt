@@ -119,12 +119,9 @@ class OrganizationalUnitTreeAPIView(APIView):
     def get_unit_tree(self, unit):
         children = []
         child_units = OrganizationalUnit.objects.filter(parent_unit=unit)
-        print(child_units)
         
         for child_unit in child_units:
             children.append(self.get_unit_tree(child_unit))
-
-        print(children)
         
         return {
             'id': unit.id,
