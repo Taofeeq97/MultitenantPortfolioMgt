@@ -7,6 +7,7 @@ from .serializers import ClientPortfolioSerializer, LoginSerializer, ClienTIndus
 from collections import defaultdict
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.views import APIView
 
 # # Create your views here.
 class ObtainTokenPairApiView(TokenObtainPairView):
@@ -114,7 +115,7 @@ class CreateClientIndustryAPIView(generics.CreateAPIView):
             return Response(response_data)
         
 
-class OrganizationalUnitTreeAPIView(generics.APIView):
+class OrganizationalUnitTreeAPIView(APIView):
     def get_unit_tree(self, unit):
         children = []
         child_units = OrganizationalUnit.objects.filter(parent_unit=unit)
