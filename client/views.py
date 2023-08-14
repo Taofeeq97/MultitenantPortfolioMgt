@@ -139,6 +139,12 @@ class OrganizationalUnitTreeAPIView(APIView):
         for root_unit in root_units:
             unit_trees.append(self.get_unit_tree(root_unit))
         
-        return Response(unit_trees, status=status.HTTP_200_OK)
+        response_data = {
+                'status': True,
+                'responseCode':status.HTTP_201_CREATED,
+                'data':unit_trees,
+                'message':'Client industry created successfully'
+            }
+        return Response(response_data)
 
     
