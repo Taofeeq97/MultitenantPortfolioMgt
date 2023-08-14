@@ -119,6 +119,7 @@ class OrganizationalUnitTreeAPIView(APIView):
     def get_unit_tree(self, unit):
         children = []
         child_units = OrganizationalUnit.objects.filter(parent_unit=unit)
+        print(child_units)
         
         for child_unit in child_units:
             children.append(self.get_unit_tree(child_unit))
@@ -138,7 +139,7 @@ class OrganizationalUnitTreeAPIView(APIView):
         unit_trees = []
         for root_unit in root_units:
             unit_trees.append(self.get_unit_tree(root_unit))
-        
+        print(unit_trees)
         response_data = {
                 'status': True,
                 'responseCode':status.HTTP_201_CREATED,
