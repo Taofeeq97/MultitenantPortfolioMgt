@@ -75,7 +75,7 @@ class ClientIndustryListAPIView(generics.ListAPIView):
 
     def list(self, request, *args, **kwargs):
         queryset = self.get_queryset()
-        serializer = self.serializer_class(queryset, many = True)
+        serializer = self.serializer_class(queryset, many=True)
         response_data = {
             'status': True,
             'responseCode': status.HTTP_200_OK,

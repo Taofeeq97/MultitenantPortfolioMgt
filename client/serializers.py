@@ -7,8 +7,9 @@ class ClienTIndustrySerializer(serializers.ModelSerializer):
         model = ClientIndustry
         fields = '__all__'
 
+
 class ClientPortfolioSerializer(serializers.ModelSerializer):
-    client_industry = ClienTIndustrySerializer()
+    client_industry = ClienTIndustrySerializer()  # Nested serializer for the dropdown
 
     class Meta:
         model = ClientPortfolio
