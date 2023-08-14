@@ -34,7 +34,7 @@ class CreateTenantAPIView(APIView):
 
             business_account.set_password(password)
             domain = Domain()
-            domain.domain = domain_name+'web-production-a587.up.railway.app'
+            domain.domain = domain_name+'.web-production-a587.up.railway.app'
             domain.tenant = tenant
             domain.is_primary = True
             domain.save()
