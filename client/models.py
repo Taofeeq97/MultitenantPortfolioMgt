@@ -32,12 +32,17 @@ class ClientIndustry(models.Model):
 class ClientPortfolio(models.Model):
     client_first_name = models.CharField(max_length=100)
     client_last_name = models.CharField(max_length=100)
+    client_gender = models.CharField(max_length=10, blank=True, null=True)
     client_industry = models.ForeignKey(ClientIndustry, on_delete=models.CASCADE)
     client_profile_picture = models.ImageField(upload_to='media')
     client_email = models.EmailField(unique=True, verbose_name='Email Address')
     client_security_question = models.CharField(max_length=100)
     client_security_answer = models.CharField(max_length=100)
     total_investment = models.IntegerField()
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now=True, null=True)
+    updated_at = models.DateTimeField(auto_now_add=True, null=True)
+
        
     def __str__(self):
         return self.client_email
