@@ -123,6 +123,8 @@ class OrganizationalUnitTreeAPIView(APIView):
         
         for child_unit in child_units:
             children.append(self.get_unit_tree(child_unit))
+
+        print(children)
         
         return {
             'id': unit.id,
