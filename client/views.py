@@ -71,7 +71,7 @@ class ClientPortfolioListAPIView(generics.ListAPIView):
 
 class ClientIndustryListAPIView(generics.ListAPIView):
     serializer_class = ClienTIndustrySerializer
-    queryset = ClientIndustry
+    queryset = ClientIndustry.objects.all()
 
     def list(self, request, *args, **kwargs):
         queryset = self.get_queryset()
