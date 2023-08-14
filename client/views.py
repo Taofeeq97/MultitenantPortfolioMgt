@@ -129,9 +129,9 @@ class OrganizationalUnitTreeAPIView(APIView):
             'children': children
         }
     
-    def get(self, request, organization_id):
+    def get(self, request):
         try:
-            root_units = OrganizationalUnit.objects.filter(parent_unit=None, organization__id=organization_id)
+            root_units = OrganizationalUnit.objects.filter(parent_unit=None, organization__id=1)
         except OrganizationalUnit.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
         
