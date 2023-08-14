@@ -47,7 +47,7 @@ class CreateClientPortfolioAPIView(generics.CreateAPIView):
 class ClientPortfolioListAPIView(generics.ListAPIView):
     queryset = ClientPortfolio.objects.all()
     serializer_class = ClientPortfolioSerializer
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
     def list(self, request, *args, **kwargs):
         queryset = self.get_queryset()
@@ -86,6 +86,7 @@ class ClientIndustryListAPIView(generics.ListAPIView):
             'message': 'Client industries retrieved successfully'
         }
         return Response(response_data)
+
 
 class CreateClientIndustryAPIView(generics.CreateAPIView):
     queryset = ClientIndustry.objects.all()
