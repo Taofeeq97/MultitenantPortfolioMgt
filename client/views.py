@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework import generics
 from rest_framework import status
 from rest_framework.response import Response
-from .models import ClientPortfolio, ClientIndustry
+from .models import ClientPortfolio, ClientIndustry, OrganizationalUnit
 from .serializers import ClientPortfolioSerializer, LoginSerializer, ClienTIndustrySerializer
 from collections import defaultdict
 from rest_framework_simplejwt.views import TokenObtainPairView
@@ -112,4 +112,32 @@ class CreateClientIndustryAPIView(generics.CreateAPIView):
                 'message': 'error occured while creating client industry'
             }
             return Response(response_data)
+        
+
+class OrganizationalUnitTreeAPIView(generics.APIView):
+    def get_unit_tree(self, unit):
+        children = []
+        child_units = OrganizationalUnit.objects.filter(parent_unit=unit)
+        
+        for child_unit in child_units:
+            children.append(self.get_unit_tree(child_unit))
+        
+        return {
+            'id': unit.id,
+            'name': unit.name,
+            'children': children
+        }
+    
+    def get(self, request, organization_id):
+        try:
+            root_units = OrganizationalUnit.objects.filter(parent_unit=None, organization__id=organization_id)
+        except OrganizationalUnit.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        
+        unit_trees = []
+        for root_unit in root_units:
+            unit_trees.append(self.get_unit_tree(root_unit))
+        
+        return Response(unit_trees, status=status.HTTP_200_OK)
+
     
