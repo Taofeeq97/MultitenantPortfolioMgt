@@ -6,6 +6,7 @@ from .models import ClientPortfolio, ClientIndustry
 from .serializers import ClientPortfolioSerializer, LoginSerializer, ClienTIndustrySerializer
 from collections import defaultdict
 from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework.permissions import IsAuthenticated
 
 # # Create your views here.
 class ObtainTokenPairApiView(TokenObtainPairView):
@@ -20,6 +21,7 @@ class ObtainTokenPairApiView(TokenObtainPairView):
 class CreateClientPortfolioAPIView(generics.CreateAPIView):
     queryset = ClientPortfolio.objects.all()
     serializer_class = ClientPortfolioSerializer
+    permission_classes = [IsAuthenticated]
 
     def create(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data)
@@ -45,11 +47,11 @@ class CreateClientPortfolioAPIView(generics.CreateAPIView):
 class ClientPortfolioListAPIView(generics.ListAPIView):
     queryset = ClientPortfolio.objects.all()
     serializer_class = ClientPortfolioSerializer
+    permission_classes = [IsAuthenticated]
 
     def list(self, request, *args, **kwargs):
         queryset = self.get_queryset()
         serializer = self.get_serializer(queryset, many=True)
-
         industry_stats = defaultdict(lambda: {'count': 0, 'total_investment': 0})
 
         for instance in serializer.data:
@@ -72,6 +74,7 @@ class ClientPortfolioListAPIView(generics.ListAPIView):
 class ClientIndustryListAPIView(generics.ListAPIView):
     serializer_class = ClienTIndustrySerializer
     queryset = ClientIndustry.objects.all()
+    permission_classes = [IsAuthenticated]
 
     def list(self, request, *args, **kwargs):
         queryset = self.get_queryset()
@@ -87,6 +90,7 @@ class ClientIndustryListAPIView(generics.ListAPIView):
 class CreateClientIndustryAPIView(generics.CreateAPIView):
     queryset = ClientIndustry.objects.all()
     serializer_class = ClienTIndustrySerializer
+    permission_classes = [IsAuthenticated]
 
     def create(self, request, *args, **kwargs):
         serializer = self.serializer_class(data = request.data)

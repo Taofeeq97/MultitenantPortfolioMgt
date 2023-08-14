@@ -4,12 +4,13 @@ from rest_framework import status
 from .serializer import SchemaTenantDomainSerializer
 from .models import Tenant, Domain
 from client.models import BusinessAcount
-
+from rest_framework.permissions import IsAuthenticated
 # Create your views here.
 
 class CreateTenantAPIView(APIView):
 
     serializer = SchemaTenantDomainSerializer
+    permission_classes = [IsAuthenticated]
 
     def post(self, request, *args, **kwargs):
         serializer = self.serializer(data = request.data)
