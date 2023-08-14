@@ -84,3 +84,27 @@ class ClientIndustryListAPIView(generics.ListAPIView):
         }
         return Response(response_data)
 
+class CreateClientIndustryAPIView(generics.CreateAPIView):
+    queryset = ClientIndustry.objects.all()
+    serializer_class = ClienTIndustrySerializer
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data = request.data)
+        if serializer.is_valid():
+            serializer.save()
+            response_data = {
+                'status': True,
+                'responseCode':status.HTTP_201_CREATED,
+                'data':serializer.data,
+                'message':'Client industry created successfully'
+            }
+            return Response(response_data) 
+        else:
+            response_data = {
+                'status':False,
+                'responseCode':status.HTTP_400_BAD_REQUEST,
+                'errors':serializer.errors,
+                'message': 'error occured while creating client industry'
+            }
+            return Response(response_data)
+    
