@@ -49,6 +49,7 @@ SHARED_APPS = (
     'rest_framework',
     'client',
     'drf_yasg',
+    'corsheaders',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -70,6 +71,7 @@ TENANT_APPS = (
     'client',
     'rest_framework_simplejwt',
     'drf_yasg',
+    'corsheaders',
     
 
 )
@@ -94,6 +96,7 @@ MIDDLEWARE = [
     'portfolio.middleware.TenantMiddleware',
 
     'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -101,6 +104,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
+
 ]
 # Simplified static file serving.
 # https://pypi.org/project/whitenoise/
