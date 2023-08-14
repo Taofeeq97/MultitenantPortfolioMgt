@@ -131,14 +131,18 @@ class OrganizationalUnitTreeAPIView(APIView):
     
     def get(self, request):
         try:
-            root_units = OrganizationalUnit.objects.filter(parent_unit=None, organization__id=1)
+            root_units = OrganizationalUnit.objects.filter(parent_unit=None, organization__id=2)
         except OrganizationalUnit.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
+            response_data = {
+                'status': False,
+                'responseCode':status.HTTP_404_NOT_FOUND,
+                'message':'Organization not found'
+            }
+            return Response(response_data)
         
         unit_trees = []
         for root_unit in root_units:
             unit_trees.append(self.get_unit_tree(root_unit))
-        print(unit_trees)
         response_data = {
                 'status': True,
                 'responseCode':status.HTTP_201_CREATED,
@@ -146,5 +150,8 @@ class OrganizationalUnitTreeAPIView(APIView):
                 'message':'Organization structure retrieved successfully'
             }
         return Response(response_data)
+
+
+
 
     
