@@ -2,8 +2,8 @@ from django.shortcuts import render
 from rest_framework import generics
 from rest_framework import status
 from rest_framework.response import Response
-from .models import ClientPortfolio, ClientIndustry, OrganizationalUnit
-from .serializers import ClientPortfolioSerializer, LoginSerializer, ClienTIndustrySerializer
+from .models import ClientPortfolio, ClientIndustry, OrganizationalUnit, Organization
+from .serializers import ClientPortfolioSerializer, LoginSerializer, ClienTIndustrySerializer, OrganizationSerializer, OrganizationalUnitSerializer
 from collections import defaultdict
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework.permissions import IsAuthenticated
@@ -22,7 +22,7 @@ class ObtainTokenPairApiView(TokenObtainPairView):
 class CreateClientPortfolioAPIView(generics.CreateAPIView):
     queryset = ClientPortfolio.objects.all()
     serializer_class = ClientPortfolioSerializer
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
     def create(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data)
@@ -150,6 +150,24 @@ class OrganizationalUnitTreeAPIView(APIView):
                 'message':'Organization structure retrieved successfully'
             }
         return Response(response_data)
+    
+
+class CreateOrganizationAPIView(generics.CreateAPIView):
+    queryset = Organization.objects.all()
+    serializer_class = OrganizationSerializer
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            response_data = {
+                'status': True,
+                'responseCode':status.HTTP_201_CREATED,
+                'data':serializer.data,
+                'message':'Organization created successfully'
+            }
+            return Response(response_data) 
+        
 
 
 

@@ -1,6 +1,8 @@
 from rest_framework import serializers
 from .models import ClientPortfolio, ClientIndustry, BusinessAcount
 from rest_framework_simplejwt.tokens import RefreshToken
+from .models import Organization, OrganizationalUnit
+
 
 class ClienTIndustrySerializer(serializers.ModelSerializer):
     class Meta:
@@ -45,3 +47,12 @@ class LoginSerializer(serializers.Serializer):
         }
         return response
         
+class OrganizationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Organization
+        fields = ('name',)
+
+class OrganizationalUnitSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = OrganizationalUnit
+        fields = ('name', 'parent_unit', 'organization')

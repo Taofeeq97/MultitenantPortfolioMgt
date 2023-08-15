@@ -10,7 +10,7 @@ from rest_framework.permissions import IsAuthenticated
 class CreateTenantAPIView(APIView):
 
     serializer = SchemaTenantDomainSerializer
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
     def post(self, request, *args, **kwargs):
         serializer = self.serializer(data = request.data)
@@ -46,8 +46,8 @@ class CreateTenantAPIView(APIView):
                 'data':serializer.data,
                 'message':'Organization structure retrieved successfully'
             }
-
             return Response(response_data)
+        
         else:
             response_data = {
                 'status': True,

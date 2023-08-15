@@ -10,5 +10,6 @@ urlpatterns = [
     path('client_list/', views.ClientPortfolioListAPIView.as_view(), name='client_list'),
     path('industry_list/', views.ClientIndustryListAPIView.as_view(), name='industry_list'),
     path('create_industry/', views.CreateClientIndustryAPIView.as_view(), name = 'create_client_industry'), 
-    path('organogram/', views.OrganizationalUnitTreeAPIView.as_view(), name = 'organogram')
+    path('organogram/', views.OrganizationalUnitTreeAPIView.as_view(), name = 'organogram'),
+    path('create_organization', views.CreateOrganizationAPIView.as_view(), name='create_organization'),
 ]
