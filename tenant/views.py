@@ -39,19 +39,20 @@ class CreateTenantAPIView(APIView):
             domain.tenant = tenant
             domain.is_primary = True
             domain.save()
-            
+
             response_data = {
                 'status': True,
                 'responseCode':status.HTTP_201_CREATED,
                 'data':serializer.data,
                 'message':'Organization structure retrieved successfully'
             }
+
             return Response(response_data)
         else:
             response_data = {
                 'status': True,
-                'responseCode':serializer.errors,
-                'data':serializer.data,
+                'responseCode':status.HTTP_400_BAD_REQUEST,
+                'data':serializer.errors,
                 'message':'error occured while creating tenant'
             }
             return Response(response_data)

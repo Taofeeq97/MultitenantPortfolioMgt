@@ -48,7 +48,7 @@ class CreateClientPortfolioAPIView(generics.CreateAPIView):
 class ClientPortfolioListAPIView(generics.ListAPIView):
     queryset = ClientPortfolio.objects.all().prefetch_related('client_industry')
     serializer_class = ClientPortfolioSerializer
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     def list(self, request, *args, **kwargs):
         queryset = self.get_queryset()
@@ -75,7 +75,7 @@ class ClientPortfolioListAPIView(generics.ListAPIView):
 class ClientIndustryListAPIView(generics.ListAPIView):
     serializer_class = ClienTIndustrySerializer
     queryset = ClientIndustry.objects.all()
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
     def list(self, request, *args, **kwargs):
         queryset = self.get_queryset()
@@ -92,7 +92,7 @@ class ClientIndustryListAPIView(generics.ListAPIView):
 class CreateClientIndustryAPIView(generics.CreateAPIView):
     queryset = ClientIndustry.objects.all()
     serializer_class = ClienTIndustrySerializer
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
     def create(self, request, *args, **kwargs):
         serializer = self.serializer_class(data = request.data)
