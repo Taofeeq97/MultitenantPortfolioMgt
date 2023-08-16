@@ -48,7 +48,7 @@ class CreateClientPortfolioAPIView(generics.CreateAPIView):
 class ClientPortfolioListAPIView(generics.ListAPIView):
     queryset = ClientPortfolio.objects.all().prefetch_related('client_industry')
     serializer_class = ClientPortfolioSerializer
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
     def list(self, request, *args, **kwargs):
         queryset = self.get_queryset()
@@ -118,7 +118,7 @@ class CreateClientIndustryAPIView(generics.CreateAPIView):
 class OrganizationalUnitTreeAPIView(APIView):
     def get_unit_tree(self, unit):
         children = []
-        child_units = OrganizationalUnit.objects.filter(parent_unit=unit)
+        child_units = OrganizationalUnit.objects.get_active_organizations().filter(parent_unit=unit)
         
         for child_unit in child_units:
             children.append(self.get_unit_tree(child_unit))
@@ -126,12 +126,11 @@ class OrganizationalUnitTreeAPIView(APIView):
         return {
             'id': unit.id,
             'name': unit.name,
-            'children': children
-        }
+            'children': children }
     
     def get(self, request):
         try:
-            root_units = OrganizationalUnit.objects.filter(parent_unit=None, organization__id=1)
+            root_units = OrganizationalUnit.objects.get_active_organizations().filter(parent_unit=None, organization__id=1)
         except OrganizationalUnit.DoesNotExist:
             response_data = {
                 'status': False,
@@ -143,6 +142,7 @@ class OrganizationalUnitTreeAPIView(APIView):
         unit_trees = []
         for root_unit in root_units:
             unit_trees.append(self.get_unit_tree(root_unit))
+        print(OrganizationalUnit.objects.get_active_organizations())
         response_data = {
                 'status': True,
                 'responseCode':status.HTTP_201_CREATED,
@@ -153,8 +153,8 @@ class OrganizationalUnitTreeAPIView(APIView):
     
 
 class CreateOrganizationAPIView(generics.CreateAPIView):
-    queryset = Organization.objects.all()
-    serializer_class = OrganizationSerializer
+    queryset = OrganizationalUnit.objects.all()
+    serializer_class = OrganizationalUnitSerializer
 
     def create(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data)

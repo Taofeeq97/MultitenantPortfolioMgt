@@ -10,7 +10,7 @@ class CreateOrganizationAPIViewTest(TestCase):
         self.client = APIClient()
         self.url = reverse('create_organization')
 
-    def test_create_valid_organization(self):
+    def test_create_organization(self):
         payload = {
             'name': 'AFEX',
         }
@@ -20,7 +20,6 @@ class CreateOrganizationAPIViewTest(TestCase):
         self.assertEqual(Organization.objects.count(), 1)
 
 
-        
 # class CreateClientPortfolioAPIViewTest(TestCase):
 #     def setUp(self):
 #         self.client = APIClient()

@@ -25,9 +25,15 @@ class UserManager(BaseUserManager):
 
     
     
-class ActiveManager(models.Manager):
- def get_queryset(self):
-    return super(ActiveManager, self).get_queryset().filter(is_active=True)
+class OrganizationManager(models.Manager):
+   
+   def get_active_organizations(self):
+      return self.filter(is_approved=True)
+   
+   def get_latest_created(self):
+      return self.order_by('-created_at')
+   
+   
 
 
 class DeletedManager(models.Manager):

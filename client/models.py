@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import PermissionsMixin, AbstractUser
-from base.manager import UserManager
+from base.manager import UserManager, OrganizationManager
 # Create your models here.
 
 class BusinessAcount(AbstractUser, PermissionsMixin):
@@ -57,6 +57,11 @@ class OrganizationalUnit(models.Model):
     name = models.CharField(max_length=50)
     parent_unit = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE)
     organization = models.ForeignKey(Organization, on_delete=models.CASCADE)
+    is_approved = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    objects = OrganizationManager()
 
     def __str__(self):
         return self.name
